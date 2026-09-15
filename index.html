@@ -9,46 +9,41 @@
 .banner{width:100%;height:240px;background:#111;border-radius:16px;overflow:hidden;border:1px solid #222;margin:15px 0}
 .banner img{width:100%;height:100%;object-fit:cover}
 .price{font-size:40px;font-weight:900;color:#00ff88;margin:10px 0}
+.pay-btn{width:100%;padding:18px;background:#00ff88;color:#000;border:0;border-radius:12px;font-size:18px;font-weight:800}
+#videoBox{display:none;margin-top:15px} #videoBox iframe{width:100%;height:220px;border-radius:12px;border:0}
 </style>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <div class="banner"><img src="https://via.placeholder.com/380x240"></div>
-  <div class="price">₹100</div>
-  <p>Pay to unlock full video</p>
-
-  <!-- REAL PAY BUTTON START -->
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <button id="pay-btn" style="width:100%;padding:16px;background:#00ff88;color:#000;border:0;border-radius:30px;font-weight:900;font-size:17px;margin:20px 0;">₹100 Pay & Unlock Video</button>
-  <div id="videoBox" style="display:none;margin-top:20px">
-    <h2>✅ Payment Success</h2>
-    <iframe src="YOUR_VIDEO_LINK_PETTU" style="width:100%;height:220px;border:0;border-radius:12px" allowfullscreen></iframe>
-  </div>
-  <!-- REAL PAY BUTTON END -->
+<div class="banner"><img id="bannerImg" src="https://via.placeholder.com/380x240"></div>
+<div class="price" id="priceText">₹10</div>
+<p id="titleText">Pay to unlock full video</p>
+<button class="pay-btn" id="payBtn">Pay with GPay / PhonePe</button>
+<div id="videoBox"><iframe id="videoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div>
+<p style="margin-top:20px"><a href="admin.html" style="color:#666">Admin Panel</a></p>
 </div>
 
 <script>
-const BACKEND = "https://viewpoint-pay-backend.onrender.com";
-document.getElementById('pay-btn').onclick = async () => {
-  const r1 = await fetch(BACKEND+'/api/create-order',{method:'POST'});
-  const d1 = await r1.json();
-  var opt = {
-    key: "rzp_test_TbZAlloBgol1LS",
-    amount: d1.order.amount, currency:"INR",
-    name:"Viewpoint", description:"Video Access",
-    order_id: d1.order.id,
-    handler: async function(res){
-      const vr = await fetch(BACKEND+'/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(res)});
-      const vd = await vr.json();
-      if(vd.success){
-        localStorage.setItem('vp_paid','true');
-        document.getElementById('videoBox').style.display='block';
-        alert('Payment Verified ✅');
-      }else alert('Failed ❌');
-    },
-    theme:{color:"#070707"}
-  };
-  new Razorpay(opt).open();
+const BACKEND="https://viewpoint-pay-backend.onrender.com";
+const data = JSON.parse(localStorage.getItem("vp_data")) || {title:"My Exclusive Video", price:10, banner:"https://via.placeholder.com/380x240", video:"https://www.youtube.com/embed/dQw4w9WgXcQ"};
+document.getElementById("titleText").innerText=data.title;
+document.getElementById("priceText").innerText="₹"+data.price;
+document.getElementById("payBtn").innerText="Pay ₹"+data.price+" with GPay";
+document.getElementById("bannerImg").src=data.banner;
+document.getElementById("videoFrame").src=data.video;
+
+document.getElementById("payBtn").onclick = async function(){
+  const btn=this; btn.innerText="Wait..."; 
+  const d1 = await fetch(BACKEND+'/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:data.price})}).then(r=>r.json());
+  var opt={key:"rzp_test_TbZAlloBgol1LS", amount:d1.amount, currency:"INR", name:data.title, order_id:d1.id,
+  handler: async function(res){
+    const vr = await fetch(BACKEND+'/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(res)});
+    const vd = await vr.json();
+    if(vd.success){ localStorage.setItem('vp_paid','true'); document.getElementById('videoBox').style.display='block'; alert('Payment Verified ✅'); }
+    else alert('Failed ❌');
+  }, theme:{color:"#070707"}};
+  new Razorpay(opt).open(); btn.innerText="Pay ₹"+data.price;
 };
 if(localStorage.getItem('vp_paid')==='true') document.getElementById('videoBox').style.display='block';
 </script>
