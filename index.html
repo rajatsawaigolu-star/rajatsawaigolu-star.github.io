@@ -1,125 +1,99 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>View Point Premium</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Full Video - ₹100</title>
 <style>
-body{margin:0;font-family:Arial;background:#0a0a0a;color:white;text-align:center}
-.top{padding:12px;background:#111;border-bottom:1px solid #222;font-weight:bold}
-.main{max-width:420px;margin:0 auto;padding:15px}
-.banner{width:100%;height:230px;background:#1a1a1a;border-radius:16px;overflow:hidden;border:1px solid #333}
+*{box-sizing:border-box} body{margin:0;background:#070707;color:#fff;font-family:Arial;text-align:center}
+.wrap{max-width:380px;margin:0 auto;padding:16px;min-height:100vh}
+.page{display:none} .active{display:block}
+.banner{width:100%;height:240px;background:#111;border-radius:16px;overflow:hidden;border:1px solid #222;margin:15px 0}
 .banner img{width:100%;height:100%;object-fit:cover}
-.info{background:#1a1a1a;border-radius:14px;padding:15px;text-align:left;border:1px solid #333;margin:12px 0}
-.pay{background:#1a1a1a;border-radius:18px;padding:20px;border:1px solid #333}
-.qr{width:190px;height:190px;background:white;margin:12px auto;border-radius:12px;padding:8px}
+.btn{background:#fff;color:#000;padding:14px 32px;border-radius:30px;font-weight:900;display:inline-block;margin:15px 0;cursor:pointer;font-size:16px}
+.price{font-size:40px;font-weight:900;color:#00ff88;margin:10px 0}
+.qr{width:200px;height:200px;background:#fff;margin:12px auto;border-radius:12px;padding:8px}
 .qr img{width:100%;height:100%}
-input{width:90%;padding:13px;border-radius:10px;border:1px solid #444;background:#222;color:white;margin:8px 0}
-button{background:#00d26a;color:white;border:none;padding:13px;border-radius:12px;width:100%;font-weight:bold;cursor:pointer;margin-top:8px}
-.admin{background:#111;padding:20px;border-radius:15px;border:1px dashed #444;margin-top:30px;text-align:left}
-.admin input{width:95%}
-.linkbox{background:#000;padding:10px;border-radius:8px;word-break:break-all;font-size:12px;color:#00ff88;margin:8px 0;border:1px solid #222}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#1c1c1c;color:#fff;text-align:center;margin:10px 0}
+.pay{background:#00d26a;color:#fff;border:none;padding:14px;border-radius:12px;width:100%;font-weight:900;font-size:17px;cursor:pointer}
+.msg{color:#bbb;font-size:13.5px;line-height:1.7}
+.small{font-size:11px;color:#666;margin-top:10px;line-height:1.4}
+video{width:100%;border-radius:12px;background:#000}
 </style>
 </head>
 <body>
-<div class="top">🔥 VIEW POINT PREMIUM 🔥</div>
-<div class="main">
-  <div id="customerView">
-    <div style="font-size:20px;font-weight:900;margin-top:10px">FULL VIDEO AVAILABLE HERE</div>
-    <div style="color:#ffcc00;font-weight:bold;margin:5px 0">पूरा वीडियो यहाँ उपलब्ध है</div>
-    <div style="font-size:13px;color:#aaa;margin-bottom:12px">You will definitely like it! 😍</div>
-    <div class="banner"><img id="bImg" src=""></div>
-    <div class="info"><h3 id="vTitle"></h3><p id="vInfo" style="color:#bbb;font-size:13px"></p></div>
-    <div class="pay">
-      <div style="color:#00ff88;font-weight:bold">🟢 PAY ₹20 TO WATCH FULL VIDEO</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dpgangadhar444-1%40oksbi%26pn%3DView%2520Point%26am%3D20%26cu%3DINR"></div>
-      <p style="font-size:12px;color:#888">Scan & Pay ₹20</p>
-      <input id="utr" placeholder="Enter UTR / Reference No">
-      <button onclick="verifyPay()">PAY ₹20 - UNLOCK VIDEO</button>
-      <p id="msg"></p>
-      <div id="player" style="display:none"></div>
-    </div>
-  </div>
+<div class="wrap">
 
-  <div id="adminView" style="display:none" class="admin">
-    <h3>👑 Admin Panel - Create Video Link</h3>
-    <input id="aTitle" placeholder="Video Title - ex: Food Video">
-    <input id="aBanner" placeholder="Banner Image URL (or leave empty for upload)">
-    <input type="file" id="aBannerFile" accept="image/*" style="color:white">
-    <input id="aInfo" placeholder="Information - ex: Duration 10min HD">
-    <input id="aVideo" placeholder="Video URL - Drive / mp4 link">
-    <button onclick="createVideo()">Create & Generate Share Link</button>
-    <div id="allLinks"></div>
+<!-- PAGE 1 - INTRO -->
+<div id="p1" class="page active">
+  <h2 style="margin-top:30px">Hey Hi Friends ❤️</h2>
+  <h2 style="color:#ffcc00">MY FULL VIDEO AVAILABLE HERE</h2>
+  <p class="msg">You will 100% like it.<br>Aap 100% pasand karoge. ❤️</p>
+  <div class="banner"><img id="b1" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600"></div>
+  <div class="btn" onclick="showPage(2)">OK / CLICK HERE 👇</div>
+  <p class="small">Tap to continue → Payment Page</p>
+</div>
+
+<!-- PAGE 2 - PAYMENT -->
+<div id="p2" class="page">
+  <div class="banner" style="height:180px"><img id="b2" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600"></div>
+  <div class="price">₹100</div>
+  <div style="font-weight:bold;letter-spacing:1px">PAID VIDEO - PLEASE PAY ₹100</div>
+  <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=upi%3A%2F%2Fpay%3Fpa%3Dpgangadhar444-1%40oksbi%26pn%3DView%2520Point%26am%3D100%26cu%3DINR"></div>
+  <p style="font-size:11px;color:#aaa">UPI: pgangadhar444-1@oksbi - GPay/PhonePe/Paytm</p>
+  <div style="background:#111;border-radius:12px;padding:12px;text-align:left;font-size:12px;color:#ccc;line-height:1.5;margin:12px 0;border:1px solid #222">
+    > Please complete the ₹100 payment first.<br>
+    After payment, open your PhonePe / Google Pay / Paytm transaction details.<br>
+    Copy the Payment Reference / Transaction ID shown there.<br>
+    Paste the same number in the box below.
   </div>
-  <button onclick="toggleAdmin()" style="background:#333;margin-top:20px;font-size:12px">🔐 Admin Login</button>
+  <input id="utr" placeholder="Paste Payment Reference Number">
+  <button class="pay" onclick="verifyPayment()">VERIFY & WATCH</button>
+  <p id="p2msg" style="font-weight:bold"></p>
+  <p class="small">🔒 1,2,3,1234 → FAIL. Real ₹100 verification needed.<br>This demo checks format, final live needs backend.</p>
+  <div class="btn" style="background:#222;color:#888;padding:8px 16px;font-size:12px" onclick="showPage(1)">← Back</div>
+</div>
+
+<!-- PAGE 3 - VIDEO -->
+<div id="p3" class="page">
+  <h2 style="color:#00ff88">FULL VIDEO AVAILABLE 🎥</h2>
+  <p style="color:#bbb;font-size:13px">Payment verified - One time access</p>
+  <video id="mainVideo" controls controlsList="nodownload" disablePictureInPicture playsinline controls poster="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600">
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+  </video>
+  <p style="color:#ff4444;font-size:12px;font-weight:bold;margin-top:10px">ONE TIME ONLY - Access will expire</p>
+</div>
+
 </div>
 
 <script>
-let videos = JSON.parse(localStorage.getItem('vp_videos')||'[]');
-if(videos.length==0){
- videos=[
-  {id:'food123', title:'Food Video - Kerala Special', banner:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600', info:'Duration: 10:30 | 1080p HD | Tasty Kerala food full video', videoUrl:'https://www.w3schools.com/html/mov_bbb.mp4'},
-  {id:'tour456', title:'Tourist Place - Munnar Hills', banner:'https://images.unsplash.com/photo-1520637102912-2df6bb2aec6d?w=600', info:'Duration: 12:00 | Best tourist place in Kerala', videoUrl:'https://www.w3schools.com/html/movie.mp4'}
- ];
- localStorage.setItem('vp_videos',JSON.stringify(videos));
+function showPage(n){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('p'+n).classList.add('active');
+ window.scrollTo(0,0);
 }
-
-function getParam(n){return new URLSearchParams(window.location.search).get(n);}
-let vidId = getParam('v');
-let current = vidId? videos.find(v=>v.id==vidId) : videos[0];
-if(current){
- document.getElementById('bImg').src=current.banner;
- document.getElementById('vTitle').innerText=current.title;
- document.getElementById('vInfo').innerText=current.info;
-}
-
-function verifyPay(){
+function verifyPayment(){
  let u=document.getElementById('utr').value.trim();
- if(u.length<6){alert('Enter valid UTR');return;}
- let used=JSON.parse(localStorage.getItem('used_'+current.id)||'[]');
- if(used.includes(u)){document.getElementById('msg').innerHTML='<span style="color:#ff4444">❌ This reference number has already been used.</span>';return;}
- used.push(u); localStorage.setItem('used_'+current.id, JSON.stringify(used));
- document.getElementById('msg').innerHTML='<span style="color:#00d26a">✅ Payment Verified!</span>';
- document.getElementById('player').innerHTML=`<video controls autoplay style="width:100%;border-radius:12px;margin-top:10px"><source src="${current.videoUrl}"></video>`;
- document.getElementById('player').style.display='block';
-}
-
-function toggleAdmin(){
- let p=prompt('Enter Admin Password:');
- if(p=='king123'){document.getElementById('adminView').style.display='block'; showLinks(); window.scrollTo(0,document.body.scrollHeight);}
- else alert('Wrong password');
-}
-function createVideo(){
- let title=document.getElementById('aTitle').value;
- let banner=document.getElementById('aBanner').value;
- let info=document.getElementById('aInfo').value;
- let videoUrl=document.getElementById('aVideo').value;
- let file=document.getElementById('aBannerFile').files[0];
- let id = title.toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,8)+Math.floor(Math.random()*999);
-
- if(file){
-   let reader=new FileReader();
-   reader.onload=function(e){ banner=e.target.result; saveVideo(id,title,banner,info,videoUrl); }
-   reader.readAsDataURL(file);
- }else{
-   if(!banner) banner='https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600';
-   saveVideo(id,title,banner,info,videoUrl);
+ let msg=document.getElementById('p2msg');
+ // REAL CHECK - block 1,2,3,1234 random
+ if(!u || u.length<10 || /^0+$/.test(u) || /^(1|2|3|1234|0987884)$/.test(u) || /^(.)\1+$/.test(u)){
+   msg.innerHTML='<span style="color:#ff4444">❌ FAIL - Enter valid Transaction ID</span>'; return;
  }
-}
-function saveVideo(id,title,banner,info,videoUrl){
- if(!title||!videoUrl){alert('Title & Video URL required');return;}
- videos.push({id,title,banner,info,videoUrl});
- localStorage.setItem('vp_videos',JSON.stringify(videos));
- showLinks();
- document.getElementById('aTitle').value=''; document.getElementById('aVideo').value='';
-}
-function showLinks(){
- let base = window.location.origin + window.location.pathname;
- let h='';
- videos.forEach(v=>{
-  let link = base+'?v='+v.id;
-  h+=`<div style="margin:12px 0;padding:10px;background:#1a1a1a;border-radius:8px"><b>${v.title}</b><div class="linkbox">${link}</div><button onclick="navigator.clipboard.writeText('${link}');alert('Link Copied!')" style="padding:6px;font-size:12px">📋 COPY SHARE LINK - Send to WhatsApp</button></div>`;
- });
- document.getElementById('allLinks').innerHTML=h;
+ if(!/[a-zA-Z0-9]{10,}/.test(u)){
+   msg.innerHTML='<span style="color:#ff4444">❌ Invalid Reference Format</span>'; return;
+ }
+ // One-time check
+ let used=JSON.parse(localStorage.getItem('used_utr')||'[]');
+ if(used.includes(u)){ msg.innerHTML='<span style="color:#ff4444">❌ Already used - One time only</span>'; return; }
+ 
+ // DEMO: Real backend verification kavali ante ikkada fetch() to Render
+ // For now, format ok ayithe pending/approved
+ msg.innerHTML='<span style="color:#ffcc00">⏳ Checking... (Demo: Format OK - Real ₹100 check needs backend)</span>';
+ setTimeout(()=>{
+   used.push(u); localStorage.setItem('used_utr',JSON.stringify(used));
+   showPage(3);
+   document.getElementById('mainVideo').play();
+ },1200);
 }
 </script>
 </body>
