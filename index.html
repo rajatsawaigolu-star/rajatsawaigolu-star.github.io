@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>View Point - ₹20</title>
+<style>
+body{margin:0;font-family:Arial;background:#0f0f0f;color:white;text-align:center;padding:20px}
+.card{max-width:400px;margin:50px auto;background:#1a1a1a;padding:25px;border-radius:15px;border:1px solid #333}
+button{background:#25D366;color:white;border:none;padding:15px 30px;font-size:18px;border-radius:10px;width:100%;font-weight:bold}
+.qr{width:200px;height:200px;background:white;margin:20px auto;display:flex;align-items:center;justify-content:center;color:black;border-radius:10px}
+input{padding:12px;width:90%;border-radius:8px;border:none;margin:10px 0}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🔥 View Point 🔥</h2>
+<p>Full Masti Video - Only ₹20</p>
+<div class="qr">YOUR QR HERE</div>
+<p>UPI ID: <b>YOURUPI@upi</b></p>
+<p>Pay ₹20 and get access</p>
+<input id="utr" placeholder="Enter UTR / Transaction ID">
+<button onclick="check()">I Paid - Watch Now</button>
+<p id="msg"></p>
+</div>
+<script>
+function check(){
+let v=document.getElementById('utr').value;
+if(v.length>5){document.getElementById('msg').innerHTML='✅ Payment Verified! <br><br> <a href="https://t.me/+YOURTELEGRAM" style="color:#25D366">Click to Watch Video</a>';}else{alert('Enter valid UTR');}
+}
+</script>
+</body>
+</html>
