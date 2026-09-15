@@ -4,46 +4,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Point - ₹20</title>
 <style>
-body{margin:0;font-family:Arial;background:#0f0f0f;color:white;text-align:center;padding:15px}
-.card{max-width:380px;margin:30px auto;background:#1a1a1a;padding:25px;border-radius:20px;border:1px solid #333}
-button{background:#00d26a;color:white;border:none;padding:15px;font-size:18px;border-radius:12px;width:100%;font-weight:bold;margin-top:15px}
-.qr{width:240px;height:240px;background:white;margin:15px auto;border-radius:15px;padding:10px}
+body{margin:0;font-family:Arial, sans-serif;background:#0a0a0a;color:white;text-align:center;padding:0}
+.top-bar{background:#111;padding:15px;font-weight:bold;letter-spacing:1px;border-bottom:1px solid #222}
+.main{max-width:420px;margin:0 auto;padding:15px}
+.title1{font-size:22px;font-weight:900;margin-top:20px;line-height:1.2}
+.title2{font-size:18px;color:#ffcc00;margin:8px 0 10px 0;font-weight:bold}
+.subtitle{font-size:14px;color:#aaa;margin-bottom:18px}
+.banner{width:100%;height:220px;background:#1a1a1a;border-radius:16px;overflow:hidden;border:1px solid #333;margin:15px 0;position:relative}
+.banner img{width:100%;height:100%;object-fit:cover}
+.banner-text{position:absolute;bottom:0;background:linear-gradient(transparent, rgba(0,0,0,0.8));width:100%;padding:10px 0;color:white;font-size:12px}
+.video-info{background:#1a1a1a;border-radius:16px;padding:18px;text-align:left;border:1px solid #333;margin:15px 0}
+.video-info h3{margin:0 0 8px 0;font-size:18px}
+.video-info p{margin:0;color:#bbb;font-size:13px;line-height:1.5}
+.pay-box{background:#1a1a1a;border-radius:20px;padding:22px;border:1px solid #333;margin-top:20px}
+.pay-title{color:#00ff88;font-weight:bold;font-size:16px;margin-bottom:10px}
+.qr{width:200px;height:200px;background:white;margin:15px auto;border-radius:12px;padding:8px}
 .qr img{width:100%;height:100%}
-input{padding:14px;width:88%;border-radius:10px;border:none;margin:10px 0;font-size:16px}
-.error{color:#ff4444;font-weight:bold}
-.success{color:#00d26a;font-weight:bold}
+input{padding:14px;width:88%;border-radius:10px;border:none;margin:10px 0;font-size:15px;background:#222;color:white;border:1px solid #444}
+button{background:#00d26a;color:white;border:none;padding:14px;font-size:16px;border-radius:12px;width:100%;font-weight:bold;margin-top:10px;cursor:pointer}
+.error{color:#ff4444}.success{color:#00d26a}
+.video-list{display:flex;gap:10px;overflow-x:auto;padding:10px 0;margin-top:20px}
+.v-thumb{min-width:110px;background:#1a1a1a;border-radius:10px;padding:6px;border:1px solid #333;cursor:pointer}
+.v-thumb img{width:100%;height:70px;object-fit:cover;border-radius:6px}
+.v-thumb p{font-size:11px;margin:5px 0 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.active-thumb{border-color:#00d26a!important}
 </style>
 </head>
 <body>
-<div class="card">
-<h2>🔥 View Point 🔥</h2>
-<p>Full Masti Video - Only ₹20</p>
-<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dpgangadhar444-1%40oksbi%26pn%3DView%2520Point%26am%3D20%26cu%3DINR"></div>
-<p>Scan & Pay ₹20</p>
-<input id="utr" placeholder="Enter UTR / Reference No">
-<button onclick="check()">I Paid - Watch Now</button>
-<p id="msg" style="margin-top:15px;font-weight:bold"></p>
+<div class="top-bar">🔥 VIEW POINT PREMIUM 🔥</div>
+<div class="main">
+
+  <div class="title1">FULL VIDEO AVAILABLE HERE</div>
+  <div class="title2">पूरा वीडियो यहाँ उपलब्ध है</div>
+  <div class="subtitle">You will definitely like it! 😍 100% Private & HD</div>
+
+  <div class="banner" id="bannerBox">
+    <img id="bannerImg" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600">
+    <div class="banner-text">HD PREMIUM VIDEO</div>
+  </div>
+
+  <div class="video-info">
+    <h3 id="videoTitle">Kerala Night Journey - Full Video</h3>
+    <p id="videoInfo">Duration: 12:45 | Quality: 1080p HD | Language: Malayalam / Hindi mix. Full masti video, only for premium members. Pay and watch instantly.</p>
+  </div>
+
+  <div class="pay-box">
+    <div class="pay-title">🟢 PAY ₹20 TO WATCH FULL VIDEO</div>
+    <div class="qr"><img id="qrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dpgangadhar444-1%40oksbi%26pn%3DView%2520Point%26am%3D20%26cu%3DINR"></div>
+    <p style="font-size:13px;color:#bbb">Scan & Pay ₹20</p>
+    <input id="utr" placeholder="Enter UTR / Reference No">
+    <button onclick="checkPay()">PAY ₹20 - UNLOCK VIDEO</button>
+    <p id="msg" style="margin-top:15px;font-weight:bold"></p>
+    <div id="videoPlayer" style="display:none;margin-top:15px"></div>
+  </div>
+
+  <div style="text-align:left;margin-top:25px;font-size:13px;color:#888">More Videos:</div>
+  <div class="video-list" id="videoList"></div>
+
 </div>
+
 <script>
-function getUsed(){return JSON.parse(localStorage.getItem('usedUTRs')||'[]');}
-function saveUsed(arr){localStorage.setItem('usedUTRs',JSON.stringify(arr));}
+// ================= EDIT HERE ONLY - NEE VIDEOS IKADA ADD CHEY =================
+const VIDEOS = [
+  {
+    id:1,
+    banner:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600",
+    title:"Kerala Night Journey - Full Video",
+    info:"Duration: 12:45 | 1080p HD | Full masti video, premium access.",
+    videoUrl:"https://www.w3schools.com/html/mov_bbb.mp4" // <-- NEE VIDEO LINK IKADA PETTU
+  },
+  {
+    id:2,
+    banner:"https://images.unsplash.com/photo-1520637102912-2df6bb2aec6d?w=600",
+    title:"Beautiful Kerala Morning",
+    info:"Duration: 08:30 | 1080p HD | Morning special.",
+    videoUrl:"https://www.w3schools.com/html/movie.mp4"
+  },
+  {
+    id:3,
+    banner:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600",
+    title:"My New Travel Video",
+    info:"Duration: 15:00 | Full HD",
+    videoUrl:"https://www.w3schools.com/html/mov_bbb.mp4"
+  }
+];
+// =============================================================================
 
-function check(){
-let v=document.getElementById('utr').value.trim();
-let msg=document.getElementById('msg');
-if(v.length<6){alert('Enter valid UTR bro');return;}
-
-let used = getUsed();
-if(used.includes(v)){
-msg.innerHTML='<span class="error">❌ This reference number has already been used.</span>';
-return;
+let currentVideo = VIDEOS[0];
+function loadVideo(v){
+  currentVideo=v;
+  document.getElementById('bannerImg').src=v.banner;
+  document.getElementById('videoTitle').innerText=v.title;
+  document.getElementById('videoInfo').innerText=v.info;
+  document.querySelectorAll('.v-thumb').forEach(el=>el.classList.remove('active-thumb'));
+  document.getElementById('thumb-'+v.id).classList.add('active-thumb');
+  document.getElementById('videoPlayer').style.display='none';
+  document.getElementById('msg').innerHTML='';
 }
+function renderList(){
+  let html='';
+  VIDEOS.forEach(v=>{
+    html+=`<div class="v-thumb ${v.id==currentVideo.id?'active-thumb':''}" id="thumb-${v.id}" onclick="loadVideo(VIDEOS[${v.id-1}])"><img src="${v.banner}"><p>${v.title}</p></div>`;
+  });
+  document.getElementById('videoList').innerHTML=html;
+}
+renderList();
 
-// First time use - save it
-used.push(v);
-saveUsed(used);
-
-msg.innerHTML='<span class="success">✅ Payment Received!</span><br><br><a href="https://t.me/" style="color:white;background:#00d26a;padding:12px 22px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:10px;">Click to Watch Video</a><br><br><span style="font-size:12px;color:#aaa">Video will play here</span>';
+function getUsed(){return JSON.parse(localStorage.getItem('usedUTRs')||'[]');}
+function saveUsed(a){localStorage.setItem('usedUTRs',JSON.stringify(a));}
+function checkPay(){
+  let v=document.getElementById('utr').value.trim();
+  let msg=document.getElementById('msg');
+  if(v.length<6){alert('Enter valid UTR');return;}
+  let used=getUsed();
+  if(used.includes(v)){msg.innerHTML='<span class="error">❌ This reference number has already been used.</span>';return;}
+  used.push(v); saveUsed(used);
+  msg.innerHTML='<span class="success">✅ Payment Verified! Loading video...</span>';
+  document.getElementById('videoPlayer').innerHTML=`<video controls autoplay style="width:100%;border-radius:12px;margin-top:10px"><source src="${currentVideo.videoUrl}" type="video/mp4">Your browser does not support video</video><p style="font-size:12px;color:#aaa;margin-top:8px">Now Playing: ${currentVideo.title}</p>`;
+  document.getElementById('videoPlayer').style.display='block';
 }
 </script>
 </body>
