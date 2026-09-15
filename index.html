@@ -10,6 +10,8 @@ button{background:#00d26a;color:white;border:none;padding:15px;font-size:18px;bo
 .qr{width:240px;height:240px;background:white;margin:15px auto;border-radius:15px;padding:10px}
 .qr img{width:100%;height:100%}
 input{padding:14px;width:88%;border-radius:10px;border:none;margin:10px 0;font-size:16px}
+.error{color:#ff4444;font-weight:bold}
+.success{color:#00d26a;font-weight:bold}
 </style>
 </head>
 <body>
@@ -17,18 +19,31 @@ input{padding:14px;width:88%;border-radius:10px;border:none;margin:10px 0;font-s
 <h2>🔥 View Point 🔥</h2>
 <p>Full Masti Video - Only ₹20</p>
 <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dpgangadhar444-1%40oksbi%26pn%3DView%2520Point%26am%3D20%26cu%3DINR"></div>
-<p>UPI ID: <b>pgangadhar444-1@oksbi</b></p>
 <p>Scan & Pay ₹20</p>
-<input id="utr" placeholder="Enter UTR / Transaction ID">
+<input id="utr" placeholder="Enter UTR / Reference No">
 <button onclick="check()">I Paid - Watch Now</button>
-<p id="msg" style="margin-top:15px;color:#00d26a;font-weight:bold"></p>
+<p id="msg" style="margin-top:15px;font-weight:bold"></p>
 </div>
 <script>
+function getUsed(){return JSON.parse(localStorage.getItem('usedUTRs')||'[]');}
+function saveUsed(arr){localStorage.setItem('usedUTRs',JSON.stringify(arr));}
+
 function check(){
-let v=document.getElementById('utr').value;
-if(v.length>=6){
-document.getElementById('msg').innerHTML='✅ Payment Received!<br><br><a href="https://t.me/" style="color:white;background:#00d26a;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:10px;">Click to Watch Video</a>';
-}else{alert('Enter valid UTR bro');}
+let v=document.getElementById('utr').value.trim();
+let msg=document.getElementById('msg');
+if(v.length<6){alert('Enter valid UTR bro');return;}
+
+let used = getUsed();
+if(used.includes(v)){
+msg.innerHTML='<span class="error">❌ This reference number has already been used.</span>';
+return;
+}
+
+// First time use - save it
+used.push(v);
+saveUsed(used);
+
+msg.innerHTML='<span class="success">✅ Payment Received!</span><br><br><a href="https://t.me/" style="color:white;background:#00d26a;padding:12px 22px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:10px;">Click to Watch Video</a><br><br><span style="font-size:12px;color:#aaa">Video will play here</span>';
 }
 </script>
 </body>
