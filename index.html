@@ -36,7 +36,7 @@ document.getElementById("videoFrame").src=data.video;
 document.getElementById("payBtn").onclick = async function(){
   const btn=this; btn.innerText="Wait..."; 
   const d1 = await fetch(BACKEND+'/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:data.price})}).then(r=>r.json());
-  var opt={key:"rzp_test_TbZAlloBgol1LS", amount:d1.amount, currency:"INR", name:data.title, order_id:d1.id,
+  var opt={key:"rzp_test_TbZAlIoBgol1LS", amount:d1.amount, currency:"INR", name:data.title, order_id:d1.id,
   handler: async function(res){
     const vr = await fetch(BACKEND+'/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(res)});
     const vd = await vr.json();
