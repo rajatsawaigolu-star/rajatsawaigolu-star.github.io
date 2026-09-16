@@ -36,6 +36,7 @@ document.getElementById("videoFrame").src=data.video;
 document.getElementById("payBtn").onclick = async function(){
   const btn=this; btn.innerText="Wait..."; 
   const d1 = await fetch(BACKEND+'/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:data.price})}).then(r=>r.json());
+if(vd.success){ localStorage.setItem('vp_paid','true'); document.getElementById('videoBox').style.display='block'; alert('Payment Verified ✅'); }
 if(vd.success){ 
   localStorage.setItem('vp_paid','true'); 
   document.getElementById('payBtn').style.display='none';
